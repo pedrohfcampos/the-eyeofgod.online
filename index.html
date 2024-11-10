@@ -23,13 +23,63 @@ function getParams() {
     })
 }();
 </script>
+<script>
+// Função para obter parâmetros UTM da URL
+function getUTMParameters() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const utms = {};
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(param => {
+        const value = urlParams.get(param);
+        if (value) {
+            utms[param] = value;
+        }
+    });
+    return utms;
+}
 
-	<script
-  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  data-utmify-prevent-subids
-  async
-  defer
-></script>
+// Função para salvar os UTMs no localStorage
+function saveUTMParametersToLocalStorage(utms) {
+    for (const [key, value] of Object.entries(utms)) {
+        localStorage.setItem(key, value);
+    }
+}
+
+// Função para carregar UTMs do localStorage e adicionar à URL se não estiverem presentes
+function applyUTMParametersFromLocalStorage() {
+    const utms = {};
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(param => {
+        const value = localStorage.getItem(param);
+        if (value) {
+            utms[param] = value;
+        }
+    });
+
+    if (Object.keys(utms).length > 0) {
+        const urlParams = new URLSearchParams(window.location.search);
+        let shouldUpdateURL = false;
+
+        for (const [key, value] of Object.entries(utms)) {
+            if (!urlParams.has(key)) {
+                urlParams.set(key, value);
+                shouldUpdateURL = true;
+            }
+        }
+
+        if (shouldUpdateURL) {
+            window.history.replaceState(null, '', `${window.location.pathname}?${urlParams}`);
+        }
+    }
+}
+
+// Executar na carga da página
+document.addEventListener('DOMContentLoaded', () => {
+    const utms = getUTMParameters();
+    if (Object.keys(utms).length > 0) {
+        saveUTMParametersToLocalStorage(utms);
+    }
+    applyUTMParametersFromLocalStorage();
+});
+</script>
 	<!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
