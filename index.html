@@ -1,6 +1,12 @@
 <!DOCTYPE html><html lang="en-US"><head>
 	<meta charset="UTF-8">
 		<title>E1 – Spy 👁‍🗨</title>
+	<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
 	<script>
   window.pixelId = "6731226e8fbe3d2e8c8a7c72";
   var a = document.createElement("script");
@@ -30,32 +36,6 @@ function getParams() {
         for (let r = 0; r < prefix.length; r++) - 1 !== e.href.indexOf(prefix[r]) && (-1 === e.href.indexOf("?") ? e.href += "?" + t.toString() + getParams() : e.href += "&" + t.toString() + getParams())
     })
 }();
-</script>
-<script>
-  function getParams() {
-    let t = "",
-      e = window.top.location.href,
-      r = new URL(e);
-    if (null != r) {
-      let a = r.searchParams.get("utm_source"),
-        n = r.searchParams.get("utm_medium"),
-        o = r.searchParams.get("utm_campaign"),
-        m = r.searchParams.get("utm_term"),
-        c = r.searchParams.get("utm_content");
-      -1 !== e.indexOf("?") && (t = `&sck=${a}|${n}|${o}|${m}|${c}`),
-        console.log(t);
-    }
-    return t;
-  }
-  !(function () {
-    var t = new URLSearchParams(window.location.search);
-    t.toString() &&
-      document.querySelectorAll("a").forEach(function (e) {
-            (-1 === e.href.indexOf("?")
-              ? (e.href += "?" + t.toString() + getParams())
-              : (e.href += "&" + t.toString() + getParams()));
-      });
-  })();
 </script>
 	<!-- Meta Pixel Code -->
 <script>
